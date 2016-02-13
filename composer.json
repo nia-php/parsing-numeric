@@ -1,0 +1,24 @@
+{
+  "name" : "nia/parsing-numeric",
+  "description" : "Component to parse numeric values from a value.",
+  "require" : {
+    "php" : ">=7.0.0",
+    "nia/parsing" : "*"
+  },
+  "license" : "MIT",
+  "keywords" : [ "nia", "parser", "numeric", "decimal" ],
+  "minimum-stability" : "dev",
+  "autoload" : {
+    "psr-4" : {
+      "Nia\\Parsing\\Numeric\\" : "sources/",
+      "Test\\Nia\\Parsing\\Numeric\\" : "tests/"
+    }
+  },
+  "type" : "library",
+  "homepage" : "http://www.nat-software.de",
+  "authors" : [ {
+    "name" : "Patrick Ullmann",
+    "email" : "patrick.ullmann@nat-software.de",
+    "role" : "lead"
+  } ]
+}
