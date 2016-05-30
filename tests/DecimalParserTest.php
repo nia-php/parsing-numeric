@@ -26,8 +26,24 @@ class DecimalParserTest extends PHPUnit_Framework_TestCase
      */
     public function testParse($value, $expected)
     {
-        $parser = new DecimalParser($value);
+        $parser = new DecimalParser();
 
+        $this->assertSame($expected, $parser->parse($value));
+    }
+
+    /**
+     * @covers \Nia\Parsing\Numeric\DecimalParser::parse
+     *
+     * Tests a really big number (2 KiB)
+     */
+    public function testReallyLargeNumber()
+    {
+        $integer = str_repeat('1', 1024);
+
+        $expected = $integer . '.' . $integer;
+        $value = 'abc' . $expected . 'def';
+
+        $parser = new DecimalParser();
         $this->assertSame($expected, $parser->parse($value));
     }
 
@@ -41,6 +57,7 @@ here-is/no/number;0
 but-here-are-comma,and.dot;0
 .12;12
 0.12;0.12
+0.120000;0.12
 12.;12
 0000.0000;0
 0,00.00,0;0
@@ -48,6 +65,14 @@ but-here-are-comma,and.dot;0
 1.,,,,.,0;1
 1,00.00,2;10000.2
 ;0
+0.00001;0.00001
+0.000000000000000000000000000000000000000001;0.000000000000000000000000000000000000000001
+100000000000000000000000000000000000000000.0;100000000000000000000000000000000000000000
+0.012345678901234567890123456789012345678901234567890123456789;0.012345678901234567890123456789012345678901234567890123456789
+12345678901234567890123456789012345678901234567890123456789;12345678901234567890123456789012345678901234567890123456789
+0.0,001;0.001
+0,0.001;0.001
+1,2,3,.,4;123.4
 EOL;
 
         // convert CSV to result set

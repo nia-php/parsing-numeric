@@ -26,3 +26,6 @@ The following sample shows you how to parse a decimal value considering comma an
 	echo $parser->parse('1.234.5'); // 1234.5
 	echo $parser->parse('1.234,5'); // 1234,5
 ```
+
+## Notice
+The parser is also able to handle large numbers (tested with strings over 2 MiB)
