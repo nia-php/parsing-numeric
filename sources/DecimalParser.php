@@ -26,31 +26,23 @@ class DecimalParser implements ParserInterface
      */
     public function parse(string $value): string
     {
-        $dotPosition = strrpos($value, '.');
-        $commaPosition = strrpos($value, ',');
-        $separatorPosition = false;
+        $value = str_replace(',', '.', $value);
+        $value = preg_replace('/[^0-9.]/', '', $value);
+        $value = preg_replace('/\.(?=.*?\.)/', '', $value);
+        $value = trim($value, '.');
 
-        if ($dotPosition && ($dotPosition > $commaPosition)) {
-            $separatorPosition = $dotPosition;
-        } elseif ($commaPosition && ($commaPosition > $dotPosition)) {
-            $separatorPosition = $commaPosition;
+        list ($integer, $fraction) = explode('.', $value) + array_fill(0, 2, '');
+
+        $integer = ltrim($integer, '0');
+
+        if ($integer === '') {
+            $integer = '0';
         }
 
-        $regex = '/[^0-9]/';
-
-        if (! $separatorPosition) {
-            return (string) intval(preg_replace($regex, '', $value));
+        if (trim($fraction, '0') !== '') {
+            return $integer . '.' . rtrim($fraction, '0');
         }
 
-        // build the result.
-        $result = intval(preg_replace($regex, '', substr($value, 0, $separatorPosition)));
-        $fraction = intval(preg_replace($regex, '', substr($value, $separatorPosition + 1)));
-
-        // add the fraction digits only if the value is not 0.
-        if ($fraction !== 0) {
-            $result .= '.' . $fraction;
-        }
-
-        return trim((string) $result, '.');
+        return (string) $integer;
     }
 }
