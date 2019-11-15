@@ -17,7 +17,7 @@ To run the unit test use the following command:
     $ phpunit --bootstrap=vendor/autoload.php tests/
 
 ## How to use
-The following sample shows you how to parse a decimal value considering comma and dot positions using the `Nia\Parsing\Numeric\DecimalParser` class.
+The following sample shows you how to parse a decimal value considering comma and dot positions using the `Nia\Parsing\Numeric\DecimalParser` and `Nia\Parsing\Numeric\MonetaryParser` classes.
 
 ```php
 	$parser = new DecimalParser();
@@ -25,6 +25,12 @@ The following sample shows you how to parse a decimal value considering comma an
 	echo $parser->parse('12,2'); // 12.2
 	echo $parser->parse('1.234.5'); // 1234.5
 	echo $parser->parse('1.234,5'); // 1234,5
+
+	$parser = new MonetaryParser();
+	echo $parser->parse('Price: 123 456 789,12 $US'); // 123456789.12
+	echo $parser->parse('12,2'); // 12.20
+	echo $parser->parse('1.234.5'); // 1234.50
+	echo $parser->parse('1.234,5'); // 1234,50
 ```
 
 ## Notice
