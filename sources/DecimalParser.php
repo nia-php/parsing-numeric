@@ -18,12 +18,6 @@ use Nia\Parsing\ParserInterface;
 class DecimalParser implements ParserInterface
 {
 
-    /**
-     *
-     * {@inheritDoc}
-     *
-     * @see \Nia\Parsing\ParserInterface::parse($value)
-     */
     public function parse(string $value): string
     {
         $value = preg_replace('/^[^0-9,.]+/', '', $value);
