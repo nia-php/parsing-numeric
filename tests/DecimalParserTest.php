@@ -10,13 +10,13 @@
 declare(strict_types = 1);
 namespace Test\Nia\Parsing\Numeric;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Nia\Parsing\Numeric\DecimalParser;
 
 /**
  * Unit test for \Nia\Parsing\Numeric\DecimalParser.
  */
-class DecimalParserTest extends PHPUnit_Framework_TestCase
+class DecimalParserTest extends TestCase
 {
 
     /**
