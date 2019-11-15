@@ -26,6 +26,9 @@ class DecimalParser implements ParserInterface
      */
     public function parse(string $value): string
     {
+        $value = preg_replace('/^[^0-9,.]+/', '', $value);
+        list($value) = preg_split('/[^0-9,.\x{00a0} ]/u', $value);
+
         $value = str_replace(',', '.', $value);
         $value = preg_replace('/[^0-9.]/', '', $value);
         $value = preg_replace('/\.(?=.*?\.)/', '', $value);
