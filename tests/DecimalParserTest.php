@@ -52,7 +52,7 @@ class DecimalParserTest extends TestCase
         $content = <<<EOL
 Foobar: 123.456.789,12 €;123456789.12
 123 456 789,12 \$US;123456789.12
-a1b2c3,4.5,1a2;12345.12
+a1b2c3,4.5,1a2;1
 here-is/no/number;0
 but-here-are-comma,and.dot;0
 .12;12
@@ -73,6 +73,9 @@ but-here-are-comma,and.dot;0
 0.0,001;0.001
 0,0.001;0.001
 1,2,3,.,4;123.4
+   12 , 34 . 56 to 99 . 63;1234.56
+this is 12 and 13 more;12
+price is between 12 and 13 \$US;12
 EOL;
 
         // convert CSV to result set
